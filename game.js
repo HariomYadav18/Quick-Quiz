@@ -1,7 +1,7 @@
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'));
-const questionCounterText = document.getElementById('questionCounterValue');
-const scoreText = document.getElementById('scoreValue');
+const questionCounterText = document.getElementById('questionCounterText');
+const scoreText = document.getElementById('scoreText');
 
 let currentQuestion = {};
 let acceptingAnswers = false;

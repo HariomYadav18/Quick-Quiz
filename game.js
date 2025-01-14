@@ -18,6 +18,7 @@ let questions = [
         choice4: "jQuery",
         answer: 1
     },
+
     {
         question: "In the context of RESTful APIs, what does the term 'idempotent' refer to?",
         choice1: "A method that can be called multiple times without different outcomes ",
@@ -26,6 +27,7 @@ let questions = [
         choice4: "A method that returns data in JSON format",
         answer: 1
     },
+
     {
         question: "Which of the following is a primary benefit of using TypeScript over JavaScript?",
         choice1: "It is faster than JavaScript",
@@ -34,6 +36,7 @@ let questions = [
         choice4: "It is exclusively for back-end development",
         answer: 2
     },
+
     {
         question: "What is the purpose of middleware in an Express.js application?",
         choice1: "To manage database connections",
@@ -42,6 +45,7 @@ let questions = [
         choice4: "To serve static files",
         answer: 3
     },
+
     {
         question: "Which SQL command is used to remove a table from a database?",
         choice1: "DELETE TABLE",
@@ -50,6 +54,7 @@ let questions = [
         choice4: "TRUNCATE TABLE",
         answer: 2
     },
+
     {
         question: "In MongoDB, what is the purpose of an index?",
         choice1: "To enforce data integrity",
@@ -57,7 +62,9 @@ let questions = [
         choice3: "To store large amounts of data",
         choice4: "To create relationships between collections",
         answer: 2
-    },{
+    },
+    
+    {
         question: "What does CORS stand for, and why is it important in web development?",
         choice1: "Cross-Origin Resource Sharing; it allows or restricts resources from being requested from another domain",
         choice2: "Cross-Origin Request Security; it secures data transmission between servers",
@@ -65,6 +72,7 @@ let questions = [
         choice4: "Cross-Origin Response Sharing; it manages response headers",
         answer: 1
     },
+
     {
         question: "Which of the following technologies is commonly used for real-time web applications?",
         choice1: "REST APIs",
@@ -73,6 +81,7 @@ let questions = [
         choice4: "WebSockets ",
         answer: 4
     },
+
     {
         question: "What is the primary function of Docker in modern web development?",
         choice1: "To manage databases",
@@ -81,6 +90,7 @@ let questions = [
         choice4: "To serve static files",
         answer: 3
     },
+
     {
         question: "In GraphQL, what is the purpose of a resolver?",
         choice1: "To define the schema of the API",
@@ -93,7 +103,7 @@ let questions = [
 ]
 
 const CORRECT_BONUS = 2;
-const MAX_QUESTIONS = 5;
+const MAX_QUESTIONS = 10;
 
 startGame = () => {
     questionCounter = 0;

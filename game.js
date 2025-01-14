@@ -10,7 +10,7 @@ let availableQuestions = [];
 
 let questions = [
     {
-        question: "Which of the following is a key feature of the ECMAScript 6 (ES6) specification?",
+        question: "Q. Which of the following is a key feature of the ECMAScript 6 (ES6) specification?",
         choice1: "Promises ",
         choice2: "Callbacks",
         choice3: "AJAX",
@@ -19,7 +19,7 @@ let questions = [
     },
 
     {
-        question: "In the context of RESTful APIs, what does the term 'idempotent' refer to?",
+        question: "Q. In the context of RESTful APIs, what does the term 'idempotent' refer to?",
         choice1: "A method that can be called multiple times without different outcomes ",
         choice2: "A method that requires authentication",
         choice3: "A method that modifies server state",
@@ -28,7 +28,7 @@ let questions = [
     },
 
     {
-        question: "Which of the following is a primary benefit of using TypeScript over JavaScript?",
+        question: "Q. Which of the following is a primary benefit of using TypeScript over JavaScript?",
         choice1: "It is faster than JavaScript",
         choice2: "It provides static typing ",
         choice3: "It eliminates the need for frameworks",
@@ -37,7 +37,7 @@ let questions = [
     },
 
     {
-        question: "What is the purpose of middleware in an Express.js application?",
+        question: "Q. What is the purpose of middleware in an Express.js application?",
         choice1: "To manage database connections",
         choice2: "To handle routing logic",
         choice3: "To process requests and responses",
@@ -46,7 +46,7 @@ let questions = [
     },
 
     {
-        question: "Which SQL command is used to remove a table from a database?",
+        question: "Q. Which SQL command is used to remove a table from a database?",
         choice1: "DELETE TABLE",
         choice2: "DROP TABLE",
         choice3: "REMOVE TABLE",
@@ -55,7 +55,7 @@ let questions = [
     },
 
     {
-        question: "In MongoDB, what is the purpose of an index?",
+        question: "Q. In MongoDB, what is the purpose of an index?",
         choice1: "To enforce data integrity",
         choice2: "To speed up query performance",
         choice3: "To store large amounts of data",
@@ -64,7 +64,7 @@ let questions = [
     },
     
     {
-        question: "What does CORS stand for, and why is it important in web development?",
+        question: "Q. What does CORS stand for, and why is it important in web development?",
         choice1: "Cross-Origin Resource Sharing; it allows or restricts resources from being requested from another domain",
         choice2: "Cross-Origin Request Security; it secures data transmission between servers",
         choice3: "Common Origin Resource Sharing; it standardizes API requests",
@@ -73,7 +73,7 @@ let questions = [
     },
 
     {
-        question: "Which of the following technologies is commonly used for real-time web applications?",
+        question: "Q. Which of the following technologies is commonly used for real-time web applications?",
         choice1: "REST APIs",
         choice2: "AJAX polling",
         choice3: "GraphQL",
@@ -82,7 +82,7 @@ let questions = [
     },
 
     {
-        question: "What is the primary function of Docker in modern web development?",
+        question: "Q. What is the primary function of Docker in modern web development?",
         choice1: "To manage databases",
         choice2: "To create virtual machines",
         choice3: "To containerize applications for consistent deployment",
@@ -91,7 +91,7 @@ let questions = [
     },
 
     {
-        question: "In GraphQL, what is the purpose of a resolver?",
+        question: "Q. In GraphQL, what is the purpose of a resolver?",
         choice1: "To define the schema of the API",
         choice2: "To handle authentication and authorization",
         choice3: "To manage subscriptions in real-time applications",
@@ -137,9 +137,25 @@ choices.forEach((choice) => {
         acceptingAnswers = false;
         const selectedChoice = e.target;
         const selectedAnswer = selectedChoice.dataset['number'];
-        getNewQuestion();
+
+        const classToApply = 
+         selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+
+
+        selectedChoice.parentElement.classList.add(classToApply);
+
+        setTimeout( () => {
+            selectedChoice.parentElement.classList.remove(classToApply);
+            getNewQuestion();
+        },1000);
+
+        });
+
+        
+        
+
     });
-});
+
 
 startGame();
 

@@ -24,3 +24,11 @@
     width: 100%;
 
 }
+
+.correct {
+    background-color:  #28a745;
+}
+
+.incorrect {
+    background-color: red;
+}

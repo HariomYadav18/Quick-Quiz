@@ -26,7 +26,11 @@ fetch("questions.json")
   questions = loadedQuestions;
   startGame();
 
+})
+.catch(err => {
+  console.error(err);
 });
+
 
 const CORRECT_BONUS = 2;
 const MAX_QUESTIONS = 10;

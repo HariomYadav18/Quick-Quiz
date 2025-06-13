@@ -30,5 +30,5 @@ saveHighScore = (e) => {
     localStorage.setItem('highScores', JSON.stringify(highScores));
     
     // Fixed: Use relative path instead of absolute path
-    window.location.assign("index1.html");
+    window.location.assign("index.html");
 };

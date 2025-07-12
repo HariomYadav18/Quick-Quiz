@@ -67,16 +67,47 @@ const showErrorMessage = (message) => {
   document.body.appendChild(errorDiv);
 };
 
-// Initialize the game when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  initializeElements();
-  loadQuestions();
-});
-
 const CORRECT_BONUS = 2;
 const MAX_QUESTIONS = 10;
 
-startGame = () => {
+// Initialize the game when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  initializeElements();
+  setupEventListeners();
+  loadQuestions();
+});
+
+// Setup event listeners for choices
+const setupEventListeners = () => {
+  choices.forEach(choice => {
+    choice.addEventListener("click", e => {
+      if (!acceptingAnswers) return;
+  
+      acceptingAnswers = false;
+      const selectedChoice = e.target;
+      const selectedAnswer = selectedChoice.dataset["number"];
+  
+      const classToApply =
+        selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+  
+      if (classToApply === "correct") {
+        incrementScore(CORRECT_BONUS);
+        playCorrectSound();
+      } else {
+        playIncorrectSound();
+      }
+  
+      selectedChoice.parentElement.classList.add(classToApply);
+  
+      setTimeout(() => {
+        selectedChoice.parentElement.classList.remove(classToApply);
+        getNewQuestion();
+      }, 1000);
+    });
+  });
+};
+
+const startGame = () => {
     console.log('startGame called');
     console.log('loader element:', loader);
     console.log('game element:', game);
@@ -117,7 +148,7 @@ startGame = () => {
     startTimer();
 };
   
-  getNewQuestion = () => {
+const getNewQuestion = () => {
     if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
       clearInterval(timerInterval);
       localStorage.setItem("mostRecentScore", score);
@@ -140,34 +171,7 @@ startGame = () => {
     availableQuestions.splice(questionIndex, 1);
     acceptingAnswers = true;
     resetTimer();
-  };
-  
-  choices.forEach(choice => {
-    choice.addEventListener("click", e => {
-      if (!acceptingAnswers) return;
-  
-      acceptingAnswers = false;
-      const selectedChoice = e.target;
-      const selectedAnswer = selectedChoice.dataset["number"];
-  
-      const classToApply =
-        selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-  
-      if (classToApply === "correct") {
-        incrementScore(CORRECT_BONUS);
-        playCorrectSound();
-      } else {
-        playIncorrectSound();
-      }
-  
-      selectedChoice.parentElement.classList.add(classToApply);
-  
-      setTimeout(() => {
-        selectedChoice.parentElement.classList.remove(classToApply);
-        getNewQuestion();
-      }, 1000);
-    });
-  });
+};
 
   // Sound effects (using Web Audio API)
   const playCorrectSound = () => {
@@ -214,13 +218,13 @@ startGame = () => {
     }
   };
   
-  incrementScore = num => {
+const incrementScore = num => {
     score += num;
     scoreText.innerText = score;
-  };
+};
 
-  // Timer functions
-  startTimer = () => {
+// Timer functions
+const startTimer = () => {
     timerInterval = setInterval(() => {
       timeLeft--;
       timerText.innerText = timeLeft;
@@ -237,17 +241,17 @@ startGame = () => {
         timeUp();
       }
     }, 1000);
-  };
+};
 
-  resetTimer = () => {
+const resetTimer = () => {
     clearInterval(timerInterval);
     timeLeft = 30;
     timerText.innerText = timeLeft;
     timerText.classList.remove('warning', 'danger');
     startTimer();
-  };
+};
 
-  timeUp = () => {
+const timeUp = () => {
     acceptingAnswers = false;
     // Show time's up message
     const timeUpMessage = document.createElement('div');
@@ -259,7 +263,7 @@ startGame = () => {
       timeUpMessage.remove();
       getNewQuestion();
     }, 1500);
-  };
+};
   
 
 

@@ -20,6 +20,10 @@ let questions = [];
 // Load questions from local JSON file
 const loadQuestions = async () => {
   try {
+    // Ensure loader is visible and game is hidden
+    loader.classList.remove("hidden");
+    game.classList.add("hidden");
+    
     const response = await fetch('questions.json');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

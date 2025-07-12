@@ -8,7 +8,7 @@ let timerInterval;
 let questions = [];
 
 // DOM elements (will be initialized when DOM is ready)
-let question, choices, progressText, scoreText, timerText, progressBarFull, loader, game;
+let question, choices, progressText, scoreText, timerText, progressBarFull, game;
 
 // Initialize DOM elements
 const initializeElements = () => {
@@ -18,28 +18,15 @@ const initializeElements = () => {
   scoreText = document.getElementById("score");
   timerText = document.getElementById("timer");
   progressBarFull = document.getElementById("progressBarFull");
-  loader = document.getElementById("loader");
   game = document.getElementById("game");
   
-  console.log('Elements initialized:');
-  console.log('loader:', loader);
-  console.log('game:', game);
+  console.log('Elements initialized');
 };
 
 // Load questions from local JSON file
 const loadQuestions = async () => {
   try {
     console.log('loadQuestions started');
-    
-    // Ensure loader is visible and game is hidden
-    if (loader) {
-        loader.classList.remove("hidden");
-        console.log('Loader shown');
-    }
-    if (game) {
-        game.classList.add("hidden");
-        console.log('Game hidden');
-    }
     
     const response = await fetch('questions.json');
     if (!response.ok) {
@@ -109,42 +96,12 @@ const setupEventListeners = () => {
 
 const startGame = () => {
     console.log('startGame called');
-    console.log('loader element:', loader);
-    console.log('game element:', game);
     
     questionCounter = 0;
     score = 0;
     timeLeft = 30;
     availableQuestions = [...questions];
     getNewQuestion();
-    
-    // Hide loader and show game
-    if (loader) {
-        loader.classList.add("hidden");
-        console.log('Loader hidden');
-    } else {
-        console.error('Loader element not found!');
-        // Fallback: try to find loader again
-        const loaderFallback = document.getElementById("loader");
-        if (loaderFallback) {
-            loaderFallback.classList.add("hidden");
-            console.log('Loader hidden via fallback');
-        }
-    }
-    
-    if (game) {
-        game.classList.remove("hidden");
-        console.log('Game shown');
-    } else {
-        console.error('Game element not found!');
-        // Fallback: try to find game again
-        const gameFallback = document.getElementById("game");
-        if (gameFallback) {
-            gameFallback.classList.remove("hidden");
-            console.log('Game shown via fallback');
-        }
-    }
-    
     startTimer();
 };
   
@@ -225,6 +182,11 @@ const incrementScore = num => {
 
 // Timer functions
 const startTimer = () => {
+    // Clear any existing timer first
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+    
     timerInterval = setInterval(() => {
       timeLeft--;
       timerText.innerText = timeLeft;
@@ -240,14 +202,21 @@ const startTimer = () => {
         clearInterval(timerInterval);
         timeUp();
       }
-    }, 1000);
+    }, 1000); // 1000ms = 1 second
 };
 
 const resetTimer = () => {
-    clearInterval(timerInterval);
+    // Clear existing timer
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+    
+    // Reset timer state
     timeLeft = 30;
     timerText.innerText = timeLeft;
     timerText.classList.remove('warning', 'danger');
+    
+    // Start new timer
     startTimer();
 };
 

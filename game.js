@@ -74,15 +74,29 @@ const setupEventListeners = () => {
       const selectedChoice = e.target;
       const selectedAnswer = selectedChoice.dataset["number"];
   
-      const classToApply =
+          const classToApply =
         selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-  
-      if (classToApply === "correct") {
+
+    if (classToApply === "correct") {
         incrementScore(CORRECT_BONUS);
         playCorrectSound();
-      } else {
+        // Add celebration emoji
+        const celebration = document.createElement('div');
+        celebration.innerHTML = '🎉';
+        celebration.style.position = 'fixed';
+        celebration.style.top = '50%';
+        celebration.style.left = '50%';
+        celebration.style.transform = 'translate(-50%, -50%)';
+        celebration.style.fontSize = '5rem';
+        celebration.style.zIndex = '1000';
+        celebration.style.animation = 'bounce 1s ease-out';
+        celebration.style.pointerEvents = 'none';
+        document.body.appendChild(celebration);
+        
+        setTimeout(() => celebration.remove(), 1000);
+    } else {
         playIncorrectSound();
-      }
+    }
   
       selectedChoice.parentElement.classList.add(classToApply);
   
@@ -113,12 +127,17 @@ const getNewQuestion = () => {
       return window.location.assign("end.html");
     }
     questionCounter++;
-    progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
+    progressText.innerText = `❓ Question ${questionCounter}/${MAX_QUESTIONS}`;
     //progress bar 
     progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%` ;
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
+    
+    // Add question animation
+    question.style.animation = 'none';
+    question.offsetHeight; // Trigger reflow
+    question.style.animation = 'slideInLeft 0.6s ease-out';
   
     choices.forEach(choice => {
       const number = choice.dataset["number"];
@@ -178,6 +197,43 @@ const getNewQuestion = () => {
 const incrementScore = num => {
     score += num;
     scoreText.innerText = score;
+    
+    // Add score animation
+    scoreText.style.animation = 'none';
+    scoreText.offsetHeight; // Trigger reflow
+    scoreText.style.animation = 'bounce 0.6s ease-out';
+    
+    // Create particle effect
+    createParticles(scoreText);
+    
+    // Special effect for high scores
+    if (score >= 10) {
+        createConfetti();
+    }
+};
+
+// Create confetti effect
+const createConfetti = () => {
+    const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FF8C42'];
+    const emojis = ['🎉', '🎊', '⭐', '🏆', '💎', '🌟'];
+    
+    for (let i = 0; i < 20; i++) {
+        const confetti = document.createElement('div');
+        confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        confetti.style.position = 'fixed';
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.top = '-50px';
+        confetti.style.fontSize = '2rem';
+        confetti.style.pointerEvents = 'none';
+        confetti.style.zIndex = '1000';
+        confetti.style.animation = `particle ${2 + Math.random() * 2}s ease-out forwards`;
+        
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => {
+            confetti.remove();
+        }, 4000);
+    }
 };
 
 // Timer functions
@@ -225,13 +281,52 @@ const timeUp = () => {
     // Show time's up message
     const timeUpMessage = document.createElement('div');
     timeUpMessage.className = 'time-up-message';
-    timeUpMessage.innerHTML = '<h3>Time\'s Up!</h3>';
+    timeUpMessage.innerHTML = '<h3>⏰ Time\'s Up!</h3>';
     document.body.appendChild(timeUpMessage);
+    
+    // Add shake animation to timer
+    timerText.style.animation = 'shake 0.5s ease-in-out';
     
     setTimeout(() => {
       timeUpMessage.remove();
+      timerText.style.animation = '';
       getNewQuestion();
     }, 1500);
+};
+
+// Create particle effects
+const createParticles = (element) => {
+    const rect = element.getBoundingClientRect();
+    const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'];
+    
+    for (let i = 0; i < 5; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.left = rect.left + rect.width / 2 + 'px';
+        particle.style.top = rect.top + rect.height / 2 + 'px';
+        particle.style.width = '8px';
+        particle.style.height = '8px';
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '1000';
+        particle.style.animation = `particle 1s ease-out forwards`;
+        
+        document.body.appendChild(particle);
+        
+        // Random direction
+        const angle = (Math.PI * 2 * i) / 5;
+        const velocity = 50 + Math.random() * 50;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity;
+        
+        particle.style.setProperty('--vx', vx + 'px');
+        particle.style.setProperty('--vy', vy + 'px');
+        
+        setTimeout(() => {
+            particle.remove();
+        }, 1000);
+    }
 };
   
 

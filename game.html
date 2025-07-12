@@ -9,7 +9,9 @@
 </head>
 <body>
     <div class="container">
-        <div id="loader"></div>
+        <div id="loader">
+            <div class="loader-text">Loading Questions...</div>
+        </div>
         <div id="game" class="justify-center flex-column">
             <div id="hud">
                 <div id="hud-item">
@@ -26,6 +28,14 @@
                         </p>
                         <h1 class="hud-main-text" id="score">
                             0
+                        </h1>
+                </div>
+                <div id="hud-item">
+                        <p class="hud-prefix">
+                            Time
+                        </p>
+                        <h1 class="hud-main-text" id="timer">
+                            30
                         </h1>
                 </div>
             </div>

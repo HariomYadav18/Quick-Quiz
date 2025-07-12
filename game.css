@@ -26,10 +26,13 @@ h1{
     margin-bottom: 5rem;
     text-shadow: 2px 2px 4px rgba(128, 0, 0, 0.1);
     animation-delay: 0.2s;
+    /* Temporarily disabled for debugging
     animation: float 3s ease-in-out infinite;
     position: relative;
+    */
 }
 
+/* Temporarily disabled for debugging
 h1::before {
     content: '🌟';
     position: absolute;
@@ -47,6 +50,7 @@ h1::after {
     font-size: 3rem;
     animation: bounce 2s ease-in-out infinite 1s;
 }
+*/
 
 h1 > span{
     font-size: 2.4rem;
@@ -90,6 +94,7 @@ h3{
     overflow: hidden;
 }
 
+/* Temporarily disabled for debugging
 .container::before {
     content: '';
     position: absolute;
@@ -113,6 +118,7 @@ h3{
     animation: shimmer 3s ease-in-out infinite;
     pointer-events: none;
 }
+*/
 
 .container > * {
     width: 100%;

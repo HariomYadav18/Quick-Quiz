@@ -21,6 +21,23 @@ const initializeElements = () => {
   game = document.getElementById("game");
   
   console.log('Elements initialized');
+  console.log('question:', question);
+  console.log('scoreText:', scoreText);
+  console.log('timerText:', timerText);
+  console.log('progressText:', progressText);
+  console.log('progressBarFull:', progressBarFull);
+  console.log('choices:', choices.length);
+  
+  // Check if all elements are found
+  if (!question || !scoreText || !timerText || !progressText || !progressBarFull || choices.length === 0) {
+    console.error('Some elements not found!');
+    console.error('question:', !!question);
+    console.error('scoreText:', !!scoreText);
+    console.error('timerText:', !!timerText);
+    console.error('progressText:', !!progressText);
+    console.error('progressBarFull:', !!progressBarFull);
+    console.error('choices:', choices.length);
+  }
 };
 
 // Load questions from local JSON file
@@ -59,9 +76,24 @@ const MAX_QUESTIONS = 10;
 
 // Initialize the game when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM Content Loaded');
   initializeElements();
-  setupEventListeners();
-  loadQuestions();
+  
+  // Wait a bit and try again if elements aren't found
+  setTimeout(() => {
+    if (!question || !scoreText || !timerText) {
+      console.log('Retrying element initialization...');
+      initializeElements();
+    }
+    
+    if (question && scoreText && timerText) {
+      setupEventListeners();
+      loadQuestions();
+    } else {
+      console.error('Critical elements still not found after retry');
+      showErrorMessage('Failed to initialize game elements. Please refresh the page.');
+    }
+  }, 100);
 });
 
 // Setup event listeners for choices
@@ -127,22 +159,34 @@ const getNewQuestion = () => {
       return window.location.assign("end.html");
     }
     questionCounter++;
-    progressText.innerText = `❓ Question ${questionCounter}/${MAX_QUESTIONS}`;
-    //progress bar 
-    progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%` ;
+    
+    // Safety checks for DOM elements
+    if (progressText) {
+        progressText.innerText = `❓ Question ${questionCounter}/${MAX_QUESTIONS}`;
+    }
+    
+    if (progressBarFull) {
+        progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%` ;
+    }
+    
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
-    question.innerText = currentQuestion.question;
     
-    // Add question animation
-    question.style.animation = 'none';
-    question.offsetHeight; // Trigger reflow
-    question.style.animation = 'slideInLeft 0.6s ease-out';
+    if (question) {
+        question.innerText = currentQuestion.question;
+        
+        // Add question animation
+        question.style.animation = 'none';
+        question.offsetHeight; // Trigger reflow
+        question.style.animation = 'slideInLeft 0.6s ease-out';
+    }
   
-    choices.forEach(choice => {
-      const number = choice.dataset["number"];
-      choice.innerText = currentQuestion["choice" + number];
-    });
+    if (choices && choices.length > 0) {
+        choices.forEach(choice => {
+          const number = choice.dataset["number"];
+          choice.innerText = currentQuestion["choice" + number];
+        });
+    }
   
     availableQuestions.splice(questionIndex, 1);
     acceptingAnswers = true;
@@ -196,15 +240,18 @@ const getNewQuestion = () => {
   
 const incrementScore = num => {
     score += num;
-    scoreText.innerText = score;
     
-    // Add score animation
-    scoreText.style.animation = 'none';
-    scoreText.offsetHeight; // Trigger reflow
-    scoreText.style.animation = 'bounce 0.6s ease-out';
-    
-    // Create particle effect
-    createParticles(scoreText);
+    if (scoreText) {
+        scoreText.innerText = score;
+        
+        // Add score animation
+        scoreText.style.animation = 'none';
+        scoreText.offsetHeight; // Trigger reflow
+        scoreText.style.animation = 'bounce 0.6s ease-out';
+        
+        // Create particle effect
+        createParticles(scoreText);
+    }
     
     // Special effect for high scores
     if (score >= 10) {
@@ -245,13 +292,16 @@ const startTimer = () => {
     
     timerInterval = setInterval(() => {
       timeLeft--;
-      timerText.innerText = timeLeft;
       
-      // Add warning effects
-      if (timeLeft <= 10) {
-        timerText.classList.add('danger');
-      } else if (timeLeft <= 20) {
-        timerText.classList.add('warning');
+      if (timerText) {
+          timerText.innerText = timeLeft;
+          
+          // Add warning effects
+          if (timeLeft <= 10) {
+            timerText.classList.add('danger');
+          } else if (timeLeft <= 20) {
+            timerText.classList.add('warning');
+          }
       }
       
       if (timeLeft <= 0) {
@@ -269,8 +319,11 @@ const resetTimer = () => {
     
     // Reset timer state
     timeLeft = 30;
-    timerText.innerText = timeLeft;
-    timerText.classList.remove('warning', 'danger');
+    
+    if (timerText) {
+        timerText.innerText = timeLeft;
+        timerText.classList.remove('warning', 'danger');
+    }
     
     // Start new timer
     startTimer();
@@ -285,11 +338,15 @@ const timeUp = () => {
     document.body.appendChild(timeUpMessage);
     
     // Add shake animation to timer
-    timerText.style.animation = 'shake 0.5s ease-in-out';
+    if (timerText) {
+        timerText.style.animation = 'shake 0.5s ease-in-out';
+    }
     
     setTimeout(() => {
       timeUpMessage.remove();
-      timerText.style.animation = '';
+      if (timerText) {
+          timerText.style.animation = '';
+      }
       getNewQuestion();
     }, 1500);
 };

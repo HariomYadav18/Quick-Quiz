@@ -1,12 +1,3 @@
-const question = document.getElementById("question");
-const choices = Array.from(document.getElementsByClassName("choice-text"));
-const progressText = document.getElementById("progressText");
-const scoreText = document.getElementById("score");
-const timerText = document.getElementById("timer");
-const progressBarFull =document.getElementById("progressBarFull");
-const loader = document.getElementById("loader");
-const game = document.getElementById("game");
-
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
@@ -14,15 +5,41 @@ let questionCounter = 0;
 let availableQuestions = [];
 let timeLeft = 30;
 let timerInterval;
-
 let questions = [];
+
+// DOM elements (will be initialized when DOM is ready)
+let question, choices, progressText, scoreText, timerText, progressBarFull, loader, game;
+
+// Initialize DOM elements
+const initializeElements = () => {
+  question = document.getElementById("question");
+  choices = Array.from(document.getElementsByClassName("choice-text"));
+  progressText = document.getElementById("progressText");
+  scoreText = document.getElementById("score");
+  timerText = document.getElementById("timer");
+  progressBarFull = document.getElementById("progressBarFull");
+  loader = document.getElementById("loader");
+  game = document.getElementById("game");
+  
+  console.log('Elements initialized:');
+  console.log('loader:', loader);
+  console.log('game:', game);
+};
 
 // Load questions from local JSON file
 const loadQuestions = async () => {
   try {
+    console.log('loadQuestions started');
+    
     // Ensure loader is visible and game is hidden
-    loader.classList.remove("hidden");
-    game.classList.add("hidden");
+    if (loader) {
+        loader.classList.remove("hidden");
+        console.log('Loader shown');
+    }
+    if (game) {
+        game.classList.add("hidden");
+        console.log('Game hidden');
+    }
     
     const response = await fetch('questions.json');
     if (!response.ok) {
@@ -30,6 +47,7 @@ const loadQuestions = async () => {
     }
     const data = await response.json();
     questions = data;
+    console.log('Questions loaded:', questions.length);
     startGame();
   } catch (error) {
     console.error('Error loading questions:', error);
@@ -49,20 +67,53 @@ const showErrorMessage = (message) => {
   document.body.appendChild(errorDiv);
 };
 
-// Initialize the game
-loadQuestions();
+// Initialize the game when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  initializeElements();
+  loadQuestions();
+});
 
 const CORRECT_BONUS = 2;
 const MAX_QUESTIONS = 10;
 
 startGame = () => {
+    console.log('startGame called');
+    console.log('loader element:', loader);
+    console.log('game element:', game);
+    
     questionCounter = 0;
     score = 0;
     timeLeft = 30;
     availableQuestions = [...questions];
     getNewQuestion();
-    game.classList.remove("hidden");
-    loader.classList.add("hidden");
+    
+    // Hide loader and show game
+    if (loader) {
+        loader.classList.add("hidden");
+        console.log('Loader hidden');
+    } else {
+        console.error('Loader element not found!');
+        // Fallback: try to find loader again
+        const loaderFallback = document.getElementById("loader");
+        if (loaderFallback) {
+            loaderFallback.classList.add("hidden");
+            console.log('Loader hidden via fallback');
+        }
+    }
+    
+    if (game) {
+        game.classList.remove("hidden");
+        console.log('Game shown');
+    } else {
+        console.error('Game element not found!');
+        // Fallback: try to find game again
+        const gameFallback = document.getElementById("game");
+        if (gameFallback) {
+            gameFallback.classList.remove("hidden");
+            console.log('Game shown via fallback');
+        }
+    }
+    
     startTimer();
 };
   

@@ -2,7 +2,8 @@ const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
-const progressBarFull =document.getElementById("progressBarFull");
+const timerText = document.getElementById("timer");
+const progressBarFull = document.getElementById("progressBarFull");
 const loader = document.getElementById("loader");
 const game = document.getElementById("game");
 
@@ -11,40 +12,25 @@ let acceptingAnswers = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
-
+let timeLeft = 30;
+let timerInterval;
 let questions = [];
 
-fetch("https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple")
-
-.then((res) => {
-  return res.json();
-})
-.then((loadedQuestions) => {
-  questions = loadedQuestions.results.map((loadedQuestion) => {
-      const formattedQuestion = {
-          question: loadedQuestion.question,
-      };
-
-      const answerChoices = [...loadedQuestion.incorrect_answers];
-      formattedQuestion.answer = Math.floor(Math.random() * 4) + 1;
-      answerChoices.splice(
-          formattedQuestion.answer - 1,
-          0,
-          loadedQuestion.correct_answer
-      );
-
-      answerChoices.forEach((choice, index) => {
-          formattedQuestion['choice' + (index + 1)] = choice;
-      });
-
-      return formattedQuestion;
-  });
- 
-  startGame();
-})
-.catch((err) => {
-  console.error(err);
-});
+// Load questions from local JSON file
+const loadQuestions = async () => {
+  try {
+    const response = await fetch('questions.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    questions = data;
+    startGame();
+  } catch (error) {
+    console.error('Error loading questions:', error);
+    showErrorMessage('Failed to load questions. Please refresh the page.');
+  }
+};
 
 // Show error message to user
 const showErrorMessage = (message) => {
@@ -61,6 +47,9 @@ const showErrorMessage = (message) => {
 const CORRECT_BONUS = 2;
 const MAX_QUESTIONS = 10;
 
+// Initialize the game
+loadQuestions();
+
 choices.forEach(choice => {
   choice.addEventListener("click", e => {
     if (!acceptingAnswers) return;
@@ -74,6 +63,9 @@ choices.forEach(choice => {
 
     if (classToApply === "correct") {
       incrementScore(CORRECT_BONUS);
+      playCorrectSound();
+    } else {
+      playIncorrectSound();
     }
 
     selectedChoice.parentElement.classList.add(classToApply);
@@ -85,26 +77,28 @@ choices.forEach(choice => {
   });
 });
 
-startGame = () => {
+const startGame = () => {
     questionCounter = 0;
     score = 0;
+    timeLeft = 30;
     availableQuestions = [...questions];
     getNewQuestion();
     game.classList.remove("hidden");
     loader.classList.add("hidden");
+    startTimer();
 };
   
-getNewQuestion = () => {
+const getNewQuestion = () => {
     if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+      clearInterval(timerInterval);
       localStorage.setItem("mostRecentScore", score);
       //go to the end page
       return window.location.assign("end.html");
     }
     questionCounter++;
     progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
-  //progress bar 
-
-  progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%` ;
+    //progress bar 
+    progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%` ;
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
@@ -116,20 +110,94 @@ getNewQuestion = () => {
   
     availableQuestions.splice(questionIndex, 1);
     acceptingAnswers = true;
+    resetTimer();
+};
+
+  // Sound effects (using Web Audio API)
+  const playCorrectSound = () => {
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+      oscillator.frequency.setValueAtTime(1000, audioContext.currentTime + 0.1);
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.3);
+    } catch (error) {
+      console.log('Sound not supported');
+    }
   };
 
-
+  const playIncorrectSound = () => {
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+      oscillator.frequency.setValueAtTime(150, audioContext.currentTime + 0.1);
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.2);
+    } catch (error) {
+      console.log('Sound not supported');
+    }
+  };
   
-incrementScore = num => {
+const incrementScore = num => {
     score += num;
     scoreText.innerText = score;
 };
 
 
 
+const startTimer = () => {
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timerText.innerText = timeLeft;
+      
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        timeUp();
+      }
+    }, 1000);
+};
 
+const resetTimer = () => {
+    clearInterval(timerInterval);
+    timeLeft = 30;
+    timerText.innerText = timeLeft;
+    startTimer();
+};
+
+const timeUp = () => {
+    acceptingAnswers = false;
+    // Show time's up message
+    const timeUpMessage = document.createElement('div');
+    timeUpMessage.className = 'time-up-message';
+    timeUpMessage.innerHTML = '<h3>Time\'s Up!</h3>';
+    document.body.appendChild(timeUpMessage);
+    
+    setTimeout(() => {
+      timeUpMessage.remove();
+      getNewQuestion();
+    }, 1500);
+};
 
 
   
-
 

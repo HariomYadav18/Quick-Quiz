@@ -15,36 +15,15 @@
 
       <h3>Select a Category</h3>
 
-      <div class="category-grid">
-        <button class="category-btn" data-category="all" onclick="selectCategory('all')">
-          <span class="category-icon">🎯</span>
-          <span class="category-name">All Categories</span>
-        </button>
-        <button class="category-btn" data-category="frontend" onclick="selectCategory('frontend')">
-          <span class="category-icon">🎨</span>
-          <span class="category-name">Frontend</span>
-        </button>
-        <button class="category-btn" data-category="backend" onclick="selectCategory('backend')">
-          <span class="category-icon">⚙️</span>
-          <span class="category-name">Backend</span>
-        </button>
-        <button class="category-btn" data-category="dsa" onclick="selectCategory('dsa')">
-          <span class="category-icon">🧮</span>
-          <span class="category-name">DSA</span>
-        </button>
-        <button class="category-btn" data-category="system-design" onclick="selectCategory('system-design')">
-          <span class="category-icon">🏗️</span>
-          <span class="category-name">System Design</span>
-        </button>
-        <button class="category-btn" data-category="devops" onclick="selectCategory('devops')">
-          <span class="category-icon">🚀</span>
-          <span class="category-name">DevOps</span>
-        </button>
-        <button class="category-btn" data-category="general" onclick="selectCategory('general')">
-          <span class="category-icon">💡</span>
-          <span class="category-name">General</span>
-        </button>
-      </div>
+      <select id="categorySelect" class="category-select" onchange="selectCategory()">
+        <option value="all">🎯 All Categories</option>
+        <option value="frontend">🎨 Frontend</option>
+        <option value="backend">⚙️ Backend</option>
+        <option value="dsa">🧮 DSA</option>
+        <option value="system-design">🏗️ System Design</option>
+        <option value="devops">🚀 DevOps</option>
+        <option value="general">💡 General Programming</option>
+      </select>
 
       <a class="btn" href="game.html" id="playBtn">Play!&#9876;</a>
       <a class="btn" href="highscores.html">Highest Scores&#x1F3C6;</a>
@@ -55,20 +34,12 @@
           localStorage.setItem('selectedCategory', 'all');
         }
 
-        // Highlight selected category
+        // Set selected category in dropdown
         const selectedCat = localStorage.getItem('selectedCategory');
-        document.querySelector(`[data-category="${selectedCat}"]`)?.classList.add('selected');
+        document.getElementById('categorySelect').value = selectedCat;
 
-        function selectCategory(category) {
-          // Remove previous selection
-          document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.classList.remove('selected');
-          });
-
-          // Add selection to clicked button
-          event.target.closest('.category-btn').classList.add('selected');
-
-          // Store in localStorage
+        function selectCategory() {
+          const category = document.getElementById('categorySelect').value;
           localStorage.setItem('selectedCategory', category);
         }
       </script>

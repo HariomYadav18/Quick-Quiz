@@ -237,12 +237,21 @@ const resetTimer = () => {
 };
 
 const timeUp = () => {
+  // Prevent multiple calls
+  if (!acceptingAnswers) return;
+
   acceptingAnswers = false;
+  clearInterval(timerInterval);
+
+  // Check if message already exists
+  const existingMessage = document.querySelector('.time-up-message');
+  if (existingMessage) return;
+
   // Show time's up message
   const timeUpMessage = document.createElement('div');
   timeUpMessage.className = 'time-up-message';
   timeUpMessage.innerHTML = '<h3>Time\'s Up!</h3>';
-  document.body.appendChild(timeUpMessage);
+  document.querySelector('.container').appendChild(timeUpMessage);
 
   setTimeout(() => {
     timeUpMessage.remove();

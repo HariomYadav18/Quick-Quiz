@@ -547,27 +547,31 @@
 
 /* Timer warning styles */
 #timer {
-    transition: color 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 #timer.warning {
-    color: #f39c12;
-    animation: pulse 1s infinite;
+    color: #ff9800;
+    text-shadow: 0 0 10px rgba(255, 152, 0, 0.3);
+    animation: gentleGlow 2s ease-in-out infinite;
 }
 
 #timer.danger {
-    color: #e74c3c;
-    animation: pulse 0.5s infinite;
+    color: #ff6b6b;
+    text-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+    animation: gentleGlow 1s ease-in-out infinite;
 }
 
-@keyframes pulse {
+@keyframes gentleGlow {
 
     0%,
     100% {
+        transform: scale(1);
         opacity: 1;
     }
 
     50% {
-        opacity: 0.7;
+        transform: scale(1.05);
+        opacity: 0.9;
     }
 }

@@ -179,6 +179,35 @@
     margin-bottom: 0;
 }
 
+/* Category Badge */
+.category-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, rgba(128, 0, 0, 0.1) 0%, rgba(128, 0, 0, 0.05) 100%);
+    border: 2px solid rgba(128, 0, 0, 0.3);
+    border-radius: 25px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.9s forwards;
+}
+
+.category-badge span:first-child {
+    font-size: 2.4rem;
+}
+
+.category-badge span:last-child {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: maroon;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
 /* Progress Bar */
 #progressBar {
     width: 20rem;

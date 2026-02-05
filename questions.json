@@ -1,32 +1,33 @@
 [
     {
+        "category": "backend",
         "question": "Q. Which of the following is a key feature of the ECMAScript 6 (ES6) specification?",
-        "choice1": "Promises ",
+        "choice1": "Promises",
         "choice2": "Callbacks",
         "choice3": "AJAX",
         "choice4": "jQuery",
         "answer": 1
     },
-
     {
-       "question": "Q. In the context of RESTful APIs, what does the term 'idempotent' refer to?",
-        "choice1": "A method that can be called multiple times without different outcomes ",
+        "category": "backend",
+        "question": "Q. In the context of RESTful APIs, what does the term 'idempotent' refer to?",
+        "choice1": "A method that can be called multiple times without different outcomes",
         "choice2": "A method that requires authentication",
         "choice3": "A method that modifies server state",
         "choice4": "A method that returns data in JSON format",
         "answer": 1
     },
-
     {
+        "category": "frontend",
         "question": "Q. Which of the following is a primary benefit of using TypeScript over JavaScript?",
         "choice1": "It is faster than JavaScript",
-        "choice2": "It provides static typing ",
+        "choice2": "It provides static typing",
         "choice3": "It eliminates the need for frameworks",
         "choice4": "It is exclusively for back-end development",
         "answer": 2
     },
-
     {
+        "category": "backend",
         "question": "Q. What is the purpose of middleware in an Express.js application?",
         "choice1": "To manage database connections",
         "choice2": "To handle routing logic",
@@ -34,8 +35,8 @@
         "choice4": "To serve static files",
         "answer": 3
     },
-
     {
+        "category": "backend",
         "question": "Q. Which SQL command is used to remove a table from a database?",
         "choice1": "DELETE TABLE",
         "choice2": "DROP TABLE",
@@ -43,8 +44,8 @@
         "choice4": "TRUNCATE TABLE",
         "answer": 2
     },
-
     {
+        "category": "backend",
         "question": "Q. In MongoDB, what is the purpose of an index?",
         "choice1": "To enforce data integrity",
         "choice2": "To speed up query performance",
@@ -52,8 +53,8 @@
         "choice4": "To create relationships between collections",
         "answer": 2
     },
-    
     {
+        "category": "backend",
         "question": "Q. What does CORS stand for, and why is it important in web development?",
         "choice1": "Cross-Origin Resource Sharing; it allows or restricts resources from being requested from another domain",
         "choice2": "Cross-Origin Request Security; it secures data transmission between servers",
@@ -61,17 +62,17 @@
         "choice4": "Cross-Origin Response Sharing; it manages response headers",
         "answer": 1
     },
-
     {
+        "category": "backend",
         "question": "Q. Which of the following technologies is commonly used for real-time web applications?",
         "choice1": "REST APIs",
         "choice2": "AJAX polling",
         "choice3": "GraphQL",
-        "choice4": "WebSockets ",
+        "choice4": "WebSockets",
         "answer": 4
     },
-
     {
+        "category": "devops",
         "question": "Q. What is the primary function of Docker in modern web development?",
         "choice1": "To manage databases",
         "choice2": "To create virtual machines",
@@ -79,14 +80,463 @@
         "choice4": "To serve static files",
         "answer": 3
     },
-
     {
+        "category": "backend",
         "question": "Q. In GraphQL, what is the purpose of a resolver?",
         "choice1": "To define the schema of the API",
         "choice2": "To handle authentication and authorization",
         "choice3": "To manage subscriptions in real-time applications",
         "choice4": "To fetch and return data for queries and mutations",
         "answer": 4
+    },
+    {
+        "category": "frontend",
+        "question": "Q. What is the Virtual DOM in React?",
+        "choice1": "A copy of the real DOM kept in memory for efficient updates",
+        "choice2": "A browser API for DOM manipulation",
+        "choice3": "A database for storing component state",
+        "choice4": "A CSS framework for styling components",
+        "answer": 1
+    },
+    {
+        "category": "frontend",
+        "question": "Q. Which CSS property is used to create a flexible box layout?",
+        "choice1": "display: grid",
+        "choice2": "display: flex",
+        "choice3": "display: inline-block",
+        "choice4": "display: table",
+        "answer": 2
+    },
+    {
+        "category": "frontend",
+        "question": "Q. What does the 'async' keyword do in JavaScript?",
+        "choice1": "Makes a function return a Promise",
+        "choice2": "Executes code in parallel",
+        "choice3": "Prevents callback hell",
+        "choice4": "Improves performance",
+        "answer": 1
+    },
+    {
+        "category": "frontend",
+        "question": "Q. Which HTML5 API allows you to store data in the browser?",
+        "choice1": "Fetch API",
+        "choice2": "localStorage API",
+        "choice3": "Canvas API",
+        "choice4": "Geolocation API",
+        "answer": 2
+    },
+    {
+        "category": "frontend",
+        "question": "Q. What is the purpose of the 'key' prop in React lists?",
+        "choice1": "To encrypt data",
+        "choice2": "To help React identify which items have changed",
+        "choice3": "To set unique IDs for styling",
+        "choice4": "To enable keyboard navigation",
+        "answer": 2
+    },
+    {
+        "category": "frontend",
+        "question": "Q. Which CSS Grid property defines the number of columns?",
+        "choice1": "grid-columns",
+        "choice2": "grid-template-columns",
+        "choice3": "column-count",
+        "choice4": "grid-column-template",
+        "answer": 2
+    },
+    {
+        "category": "frontend",
+        "question": "Q. What is event bubbling in JavaScript?",
+        "choice1": "Events propagate from child to parent elements",
+        "choice2": "Events are queued for later execution",
+        "choice3": "Events are duplicated across elements",
+        "choice4": "Events are prevented from firing",
+        "answer": 1
+    },
+    {
+        "category": "frontend",
+        "question": "Q. Which method is used to prevent default browser behavior?",
+        "choice1": "event.stopPropagation()",
+        "choice2": "event.preventDefault()",
+        "choice3": "event.stopDefault()",
+        "choice4": "event.cancel()",
+        "answer": 2
+    },
+    {
+        "category": "frontend",
+        "question": "Q. What is the purpose of CSS media queries?",
+        "choice1": "To load external stylesheets",
+        "choice2": "To apply styles based on device characteristics",
+        "choice3": "To optimize CSS performance",
+        "choice4": "To validate CSS syntax",
+        "answer": 2
+    },
+    {
+        "category": "frontend",
+        "question": "Q. Which JavaScript feature allows destructuring of objects?",
+        "choice1": "ES5",
+        "choice2": "ES6",
+        "choice3": "ES3",
+        "choice4": "ES2020",
+        "answer": 2
+    },
+    {
+        "category": "dsa",
+        "question": "Q. What is the time complexity of binary search?",
+        "choice1": "O(n)",
+        "choice2": "O(log n)",
+        "choice3": "O(n^2)",
+        "choice4": "O(1)",
+        "answer": 2
+    },
+    {
+        "category": "dsa",
+        "question": "Q. Which data structure uses LIFO (Last In First Out)?",
+        "choice1": "Queue",
+        "choice2": "Stack",
+        "choice3": "Array",
+        "choice4": "Linked List",
+        "answer": 2
+    },
+    {
+        "category": "dsa",
+        "question": "Q. What is the worst-case time complexity of QuickSort?",
+        "choice1": "O(n log n)",
+        "choice2": "O(n^2)",
+        "choice3": "O(n)",
+        "choice4": "O(log n)",
+        "answer": 2
+    },
+    {
+        "category": "dsa",
+        "question": "Q. Which traversal visits nodes in the order: left, root, right?",
+        "choice1": "Preorder",
+        "choice2": "Inorder",
+        "choice3": "Postorder",
+        "choice4": "Level-order",
+        "answer": 2
+    },
+    {
+        "category": "dsa",
+        "question": "Q. What is a hash collision?",
+        "choice1": "When two keys hash to the same index",
+        "choice2": "When a hash function fails",
+        "choice3": "When memory is full",
+        "choice4": "When keys are duplicated",
+        "answer": 1
+    },
+    {
+        "category": "dsa",
+        "question": "Q. Which algorithm is used to find the shortest path in a graph?",
+        "choice1": "Depth-First Search",
+        "choice2": "Dijkstra's Algorithm",
+        "choice3": "Binary Search",
+        "choice4": "Merge Sort",
+        "answer": 2
+    },
+    {
+        "category": "dsa",
+        "question": "Q. What is the space complexity of merge sort?",
+        "choice1": "O(1)",
+        "choice2": "O(n)",
+        "choice3": "O(log n)",
+        "choice4": "O(n^2)",
+        "answer": 2
+    },
+    {
+        "category": "dsa",
+        "question": "Q. Which data structure is best for implementing a priority queue?",
+        "choice1": "Array",
+        "choice2": "Heap",
+        "choice3": "Stack",
+        "choice4": "Linked List",
+        "answer": 2
+    },
+    {
+        "category": "dsa",
+        "question": "Q. What is dynamic programming?",
+        "choice1": "A technique to optimize recursive algorithms by storing results",
+        "choice2": "A way to allocate memory dynamically",
+        "choice3": "A programming paradigm",
+        "choice4": "A type of data structure",
+        "answer": 1
+    },
+    {
+        "category": "dsa",
+        "question": "Q. What is the average time complexity of hash table lookup?",
+        "choice1": "O(n)",
+        "choice2": "O(1)",
+        "choice3": "O(log n)",
+        "choice4": "O(n log n)",
+        "answer": 2
+    },
+    {
+        "category": "system-design",
+        "question": "Q. What is horizontal scaling?",
+        "choice1": "Adding more power to existing servers",
+        "choice2": "Adding more servers to distribute load",
+        "choice3": "Optimizing database queries",
+        "choice4": "Compressing data",
+        "answer": 2
+    },
+    {
+        "category": "system-design",
+        "question": "Q. What is the purpose of a load balancer?",
+        "choice1": "To store data",
+        "choice2": "To distribute traffic across multiple servers",
+        "choice3": "To cache responses",
+        "choice4": "To encrypt data",
+        "answer": 2
+    },
+    {
+        "category": "system-design",
+        "question": "Q. Which caching strategy stores data after it's requested?",
+        "choice1": "Write-through",
+        "choice2": "Lazy loading",
+        "choice3": "Write-back",
+        "choice4": "Cache-aside",
+        "answer": 2
+    },
+    {
+        "category": "system-design",
+        "question": "Q. What is database sharding?",
+        "choice1": "Backing up data",
+        "choice2": "Partitioning data across multiple databases",
+        "choice3": "Encrypting data",
+        "choice4": "Indexing data",
+        "answer": 2
+    },
+    {
+        "category": "system-design",
+        "question": "Q. What is the CAP theorem?",
+        "choice1": "A theorem about CPU, API, and Performance",
+        "choice2": "Consistency, Availability, Partition tolerance trade-offs",
+        "choice3": "A caching strategy",
+        "choice4": "A database design pattern",
+        "answer": 2
+    },
+    {
+        "category": "system-design",
+        "question": "Q. What is a microservices architecture?",
+        "choice1": "A small application",
+        "choice2": "An architecture where applications are built as small, independent services",
+        "choice3": "A type of database",
+        "choice4": "A caching mechanism",
+        "answer": 2
+    },
+    {
+        "category": "system-design",
+        "question": "Q. What is the purpose of a CDN (Content Delivery Network)?",
+        "choice1": "To store databases",
+        "choice2": "To serve content from geographically distributed servers",
+        "choice3": "To balance server load",
+        "choice4": "To encrypt data",
+        "answer": 2
+    },
+    {
+        "category": "system-design",
+        "question": "Q. What is eventual consistency?",
+        "choice1": "Data is always consistent",
+        "choice2": "Data becomes consistent over time",
+        "choice3": "Data is never consistent",
+        "choice4": "Data consistency is not guaranteed",
+        "answer": 2
+    },
+    {
+        "category": "system-design",
+        "question": "Q. What is the purpose of a message queue?",
+        "choice1": "To store files",
+        "choice2": "To enable asynchronous communication between services",
+        "choice3": "To cache data",
+        "choice4": "To load balance",
+        "answer": 2
+    },
+    {
+        "category": "system-design",
+        "question": "Q. What is database replication?",
+        "choice1": "Deleting data",
+        "choice2": "Copying data to multiple database servers",
+        "choice3": "Encrypting data",
+        "choice4": "Compressing data",
+        "answer": 2
+    },
+    {
+        "category": "devops",
+        "question": "Q. What is CI/CD?",
+        "choice1": "Continuous Integration and Continuous Deployment",
+        "choice2": "Code Integration and Code Deployment",
+        "choice3": "Container Integration and Container Deployment",
+        "choice4": "Cloud Integration and Cloud Deployment",
+        "answer": 1
+    },
+    {
+        "category": "devops",
+        "question": "Q. What is the purpose of a Dockerfile?",
+        "choice1": "To store documentation",
+        "choice2": "To define how to build a Docker image",
+        "choice3": "To configure databases",
+        "choice4": "To write tests",
+        "answer": 2
+    },
+    {
+        "category": "devops",
+        "question": "Q. Which Git command is used to merge branches?",
+        "choice1": "git combine",
+        "choice2": "git merge",
+        "choice3": "git join",
+        "choice4": "git unite",
+        "answer": 2
+    },
+    {
+        "category": "devops",
+        "question": "Q. What is Kubernetes used for?",
+        "choice1": "Database management",
+        "choice2": "Container orchestration",
+        "choice3": "Code compilation",
+        "choice4": "Testing automation",
+        "answer": 2
+    },
+    {
+        "category": "devops",
+        "question": "Q. What is infrastructure as code (IaC)?",
+        "choice1": "Writing code for infrastructure",
+        "choice2": "Managing infrastructure through machine-readable files",
+        "choice3": "Building physical servers",
+        "choice4": "Coding on servers",
+        "answer": 2
+    },
+    {
+        "category": "devops",
+        "question": "Q. Which tool is commonly used for configuration management?",
+        "choice1": "Docker",
+        "choice2": "Ansible",
+        "choice3": "Git",
+        "choice4": "Jenkins",
+        "answer": 2
+    },
+    {
+        "category": "devops",
+        "question": "Q. What is the purpose of monitoring in DevOps?",
+        "choice1": "To write code",
+        "choice2": "To track application performance and detect issues",
+        "choice3": "To deploy applications",
+        "choice4": "To test code",
+        "answer": 2
+    },
+    {
+        "category": "devops",
+        "question": "Q. What is a blue-green deployment?",
+        "choice1": "Deploying to production and staging simultaneously",
+        "choice2": "Running two identical environments and switching traffic between them",
+        "choice3": "Using blue and green color schemes",
+        "choice4": "Deploying only on weekends",
+        "answer": 2
+    },
+    {
+        "category": "devops",
+        "question": "Q. What is the purpose of version control?",
+        "choice1": "To compile code",
+        "choice2": "To track changes in code over time",
+        "choice3": "To deploy applications",
+        "choice4": "To test code",
+        "answer": 2
+    },
+    {
+        "category": "devops",
+        "question": "Q. What is a webhook?",
+        "choice1": "A fishing tool",
+        "choice2": "An HTTP callback that sends data when an event occurs",
+        "choice3": "A type of API",
+        "choice4": "A database trigger",
+        "answer": 2
+    },
+    {
+        "category": "general",
+        "question": "Q. What is Object-Oriented Programming (OOP)?",
+        "choice1": "Programming with objects that contain data and methods",
+        "choice2": "Programming focused on functions",
+        "choice3": "Programming for web applications",
+        "choice4": "Programming with only primitive types",
+        "answer": 1
+    },
+    {
+        "category": "general",
+        "question": "Q. What is the Singleton design pattern?",
+        "choice1": "A pattern that allows multiple instances",
+        "choice2": "A pattern that ensures only one instance of a class exists",
+        "choice3": "A pattern for database connections",
+        "choice4": "A pattern for UI components",
+        "answer": 2
+    },
+    {
+        "category": "general",
+        "question": "Q. What is unit testing?",
+        "choice1": "Testing the entire application",
+        "choice2": "Testing individual units or components of code",
+        "choice3": "Testing user interfaces",
+        "choice4": "Testing databases",
+        "answer": 2
+    },
+    {
+        "category": "general",
+        "question": "Q. What is the DRY principle?",
+        "choice1": "Don't Repeat Yourself",
+        "choice2": "Do Repeat Yourself",
+        "choice3": "Debug Regularly Yourself",
+        "choice4": "Deploy Rapidly Yourself",
+        "answer": 1
+    },
+    {
+        "category": "general",
+        "question": "Q. What is refactoring?",
+        "choice1": "Rewriting code from scratch",
+        "choice2": "Improving code structure without changing functionality",
+        "choice3": "Adding new features",
+        "choice4": "Fixing bugs",
+        "answer": 2
+    },
+    {
+        "category": "general",
+        "question": "Q. What is the purpose of code review?",
+        "choice1": "To write code faster",
+        "choice2": "To ensure code quality and share knowledge",
+        "choice3": "To deploy code",
+        "choice4": "To test code",
+        "answer": 2
+    },
+    {
+        "category": "general",
+        "question": "Q. What is technical debt?",
+        "choice1": "Money owed to developers",
+        "choice2": "The cost of additional work caused by choosing quick solutions",
+        "choice3": "Server costs",
+        "choice4": "Software licenses",
+        "answer": 2
+    },
+    {
+        "category": "general",
+        "question": "Q. What is the Factory design pattern?",
+        "choice1": "A pattern for building factories",
+        "choice2": "A pattern for creating objects without specifying exact classes",
+        "choice3": "A pattern for database access",
+        "choice4": "A pattern for UI design",
+        "answer": 2
+    },
+    {
+        "category": "general",
+        "question": "Q. What is the difference between compilation and interpretation?",
+        "choice1": "Compilation translates code to machine code before execution",
+        "choice2": "They are the same",
+        "choice3": "Interpretation is faster",
+        "choice4": "Compilation happens at runtime",
+        "answer": 1
+    },
+    {
+        "category": "general",
+        "question": "Q. What is polymorphism in OOP?",
+        "choice1": "Having multiple forms",
+        "choice2": "The ability of objects to take on multiple forms or behaviors",
+        "choice3": "Creating multiple classes",
+        "choice4": "Using multiple programming languages",
+        "answer": 2
     }
-    
 ]

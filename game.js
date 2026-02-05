@@ -85,7 +85,47 @@ const startGame = () => {
   questionCounter = 0;
   score = 0;
   timeLeft = 30;
-  availableQuestions = [...questions];
+
+  // Get selected category from localStorage
+  const selectedCategory = localStorage.getItem('selectedCategory') || 'all';
+
+  // Filter questions by category
+  if (selectedCategory === 'all') {
+    availableQuestions = [...questions];
+  } else {
+    availableQuestions = questions.filter(q => q.category === selectedCategory);
+  }
+
+  // Check if we have enough questions
+  if (availableQuestions.length < MAX_QUESTIONS) {
+    showErrorMessage(`Not enough questions in this category. Only ${availableQuestions.length} available.`);
+    return;
+  }
+
+  // Display selected category
+  const categoryIcons = {
+    'all': '🎯',
+    'frontend': '🎨',
+    'backend': '⚙️',
+    'dsa': '🧮',
+    'system-design': '🏗️',
+    'devops': '🚀',
+    'general': '💡'
+  };
+
+  const categoryNames = {
+    'all': 'All Categories',
+    'frontend': 'Frontend',
+    'backend': 'Backend',
+    'dsa': 'DSA',
+    'system-design': 'System Design',
+    'devops': 'DevOps',
+    'general': 'General Programming'
+  };
+
+  document.getElementById('categoryIcon').textContent = categoryIcons[selectedCategory];
+  document.getElementById('categoryName').textContent = categoryNames[selectedCategory];
+
   getNewQuestion();
   game.classList.remove("hidden");
   loader.classList.add("hidden");
